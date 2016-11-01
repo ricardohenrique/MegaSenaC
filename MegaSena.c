@@ -6,6 +6,54 @@
 #define countJogosLinha	  3000
 #define countJogosColuna  6
 
+int main(){	
+	menu();
+}
+
+
+void menu(void){
+	int jogos[countJogosLinha][countJogosColuna];
+	int countNumeroX[60][2];
+	int x, y; 
+    char op;
+    while(1){
+
+        system("cls");
+
+		printf("-------------------------------------\n");
+        printf("-------------Mega Sena---------------\n");
+        printf("-------------1 Sortear---------------\n");
+        printf("-------------2 Estatistica-----------\n");
+        printf("-------------3 Jogar-----------------\n");
+        printf("-------------0 Sair------------------\n");
+        printf("-------------------------------------\n");
+        printf("Digite a opcão desejada: ");
+        scanf("%c", &op);
+
+        switch(op){
+
+            case '1' : 
+				popularJogos(jogos, countNumeroX);
+				mostrarJogos(jogos);	
+			break;
+            case '2' : 
+            	mostrarCountNumeros(countNumeroX);           
+			break;
+            case '3' : 
+				//jogada(sorteios);                
+			break;
+            case '0' : 
+				printf("\nVolte sempre!!\n");    
+				exit(0);
+            default  : 
+				printf("\nOpção não existe!!\n");
+                getch();                        
+			break;
+        }
+    }
+}
+
+
 void bubbleSort(int vet[], int tam){
     int i, j;
     int aux;
@@ -13,9 +61,9 @@ void bubbleSort(int vet[], int tam){
     for (i=1; i<tam;i++){
         for (j=0;j<tam-i;j++){
               if (vet[j] > vet[j+1]){
-                     aux = vet[j];
-                     vet[j] = vet[j+1];
-                     vet[j+1] = aux;
+                    aux = vet[j];
+                    vet[j] = vet[j+1];
+                    vet[j+1] = aux;
               }
          }
       }
@@ -83,14 +131,5 @@ void mostrarCountNumeros(int countNumeroX[60][2]){
 	}	
 }
 
-int main(){	
-	int jogos[countJogosLinha][countJogosColuna];
-	int countNumeroX[60][2];
-	int x, y; 
-	
-	popularJogos(jogos, countNumeroX);
-	mostrarJogos(jogos);	
-	mostrarCountNumeros(countNumeroX);
-}
 
 
