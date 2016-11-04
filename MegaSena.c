@@ -16,6 +16,7 @@ void menu(void){
 	int countNumeroX[60][2];
 	int x, y; 
     char op;
+    
     while(1){
 
         system("cls");
@@ -28,7 +29,10 @@ void menu(void){
         printf("-------------0 Sair------------------\n");
         printf("-------------------------------------\n");
         printf("Digite a opcão desejada: ");
-        scanf("%c", &op);
+        
+        //limpa variáveis setadas anteriormente
+        fflush(stdin);
+		scanf("%c", &op);
 
         switch(op){
 
@@ -120,7 +124,8 @@ void mostrarJogos(int jogos[countJogosLinha][countJogosColuna]){
 			printf("%.2d ", vetorOrdenado[y]); 		              
         }  
         printf("]");
-	}	
+	}
+	getch();	
 }
 
 void mostrarCountNumeros(int countNumeroX[60][2]){
@@ -129,6 +134,7 @@ void mostrarCountNumeros(int countNumeroX[60][2]){
 		printf("\n Numero [%.2d]: ", x); 		  		 
 		printf("%.2d vezes", countNumeroX[x][1]); 	              
 	}	
+	getch();
 }
 
 
