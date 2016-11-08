@@ -10,10 +10,9 @@ int main(){
 	menu();
 }
 
-
 void menu(void){
 	int jogos[countJogosLinha][countJogosColuna];
-	int countNumeroX[60][2];
+	int countNumeroX[61][2];
 	int x, y; 
     char op;
     
@@ -24,11 +23,11 @@ void menu(void){
 		printf("-------------------------------------\n");
         printf("-------------Mega Sena---------------\n");
         printf("-------------1 Sortear---------------\n");
-        printf("-------------2 Estatistica-----------\n");
+        printf("-------------2 Dados-----------------\n");
         printf("-------------3 Jogar-----------------\n");
         printf("-------------0 Sair------------------\n");
         printf("-------------------------------------\n");
-        printf("Digite a opcão desejada: ");
+        printf("Digite a opcao desejada: ");
         
         //limpa variáveis setadas anteriormente
         fflush(stdin);
@@ -41,16 +40,17 @@ void menu(void){
 				mostrarJogos(jogos);	
 			break;
             case '2' : 
-            	mostrarCountNumeros(countNumeroX);           
+            	mostrarCountNumeros(countNumeroX);  
+				duplasMaisSorteadas(jogos);         
 			break;
             case '3' : 
 				//jogada(sorteios);                
 			break;
             case '0' : 
-				printf("\nVolte sempre!!\n");    
+				printf("\nObrigado por jogar, volte sempre.\n");    
 				exit(0);
             default  : 
-				printf("\nOpção não existe!!\n");
+				printf("\nOpcao nao encontrada, digite novamente\n");
                 getch();                        
 			break;
         }
@@ -78,7 +78,7 @@ void popularJogos(int jogos[3000][6], int countNumeroX[60][2]){
 	int status;
 	int VALIDO = 1, INVALIDO = 0; 
 	
-	for(x = 0; x < 60; x++){
+	for(x = 0; x < 61; x++){
         countNumeroX[x][0] = x;
         countNumeroX[x][1] = 0;
 	}
@@ -98,7 +98,7 @@ void popularJogos(int jogos[3000][6], int countNumeroX[60][2]){
 				}
 			} while (status == INVALIDO);  
 			
-            for (j = 0; j < 60; j++) {
+            for (j = 0; j < 61; j++) {
                 if(countNumeroX[j][0] == jogos[x][i]) {
                     countNumeroX[j][1] = countNumeroX[j][1] + 1;
                 }
@@ -124,13 +124,14 @@ void mostrarJogos(int jogos[countJogosLinha][countJogosColuna]){
 			printf("%.2d ", vetorOrdenado[y]); 		              
         }  
         printf("]");
+        
 	}
 	getch();	
 }
 
-void mostrarCountNumeros(int countNumeroX[60][2]){
+void mostrarCountNumeros(int countNumeroX[61][2]){
 	int x;
-	for(x = 1; x < 60; x++){
+	for(x = 1; x < 61; x++){
 		printf("\n Numero [%.2d]: ", x); 		  		 
 		printf("%.2d vezes", countNumeroX[x][1]); 	              
 	}	
@@ -138,4 +139,59 @@ void mostrarCountNumeros(int countNumeroX[60][2]){
 }
 
 
+void duplasMaisSorteadas(int jogos[countJogosLinha][countJogosColuna]){
+	int x, y, i, j, vetorOrdenado[6], matrizCountDupla[61][61];
+	
+    for (i = 0; i < 61; i++) {
+        for (j = 0; j < 61; j++) {
+            matrizCountDupla[i][j] = 0;
+        }
+    }
+    
+	for(x = 0; x < countJogosLinha; x++){		  		 
+	    for(y = 0; y < countJogosColuna; y++){	
+	    	vetorOrdenado[y] = jogos[x][y];		              
+        }   
+		bubbleSort(vetorOrdenado, countJogosColuna);
+
+        for (i = 0; i < 61; i++) {
+            for (j = 0; j < 61; j++) {
+				//compara primeiro número com os demais
+                if (vetorOrdenado[0] == i && vetorOrdenado[1] == j) matrizCountDupla[i][j] = matrizCountDupla[i][j] + 1;
+                if (vetorOrdenado[0] == i && vetorOrdenado[2] == j) matrizCountDupla[i][j] = matrizCountDupla[i][j] + 1;
+                if (vetorOrdenado[0] == i && vetorOrdenado[3] == j) matrizCountDupla[i][j] = matrizCountDupla[i][j] + 1;
+                if (vetorOrdenado[0] == i && vetorOrdenado[4] == j) matrizCountDupla[i][j] = matrizCountDupla[i][j] + 1;
+                if (vetorOrdenado[0] == i && vetorOrdenado[5] == j) matrizCountDupla[i][j] = matrizCountDupla[i][j] + 1;
+                
+                //compara segundo número com os demais
+                if (vetorOrdenado[1] == i && vetorOrdenado[2] == j) matrizCountDupla[i][j] = matrizCountDupla[i][j] + 1;
+                if (vetorOrdenado[1] == i && vetorOrdenado[3] == j) matrizCountDupla[i][j] = matrizCountDupla[i][j] + 1;
+                if (vetorOrdenado[1] == i && vetorOrdenado[4] == j) matrizCountDupla[i][j] = matrizCountDupla[i][j] + 1;
+                if (vetorOrdenado[1] == i && vetorOrdenado[5] == j) matrizCountDupla[i][j] = matrizCountDupla[i][j] + 1;
+                
+                //compara terceiro número com os demais
+                if (vetorOrdenado[2] == i && vetorOrdenado[3] == j) matrizCountDupla[i][j] = matrizCountDupla[i][j] + 1;
+                if (vetorOrdenado[2] == i && vetorOrdenado[4] == j) matrizCountDupla[i][j] = matrizCountDupla[i][j] + 1;
+                if (vetorOrdenado[2] == i && vetorOrdenado[5] == j) matrizCountDupla[i][j] = matrizCountDupla[i][j] + 1;
+                
+                //compara quarto número com os demais
+                if (vetorOrdenado[3] == i && vetorOrdenado[4] == j) matrizCountDupla[i][j] = matrizCountDupla[i][j] + 1;
+                if (vetorOrdenado[3] == i && vetorOrdenado[5] == j) matrizCountDupla[i][j] = matrizCountDupla[i][j] + 1;
+                
+                //compara quinto número com os demais
+                if (vetorOrdenado[4] == i && vetorOrdenado[5] == j) matrizCountDupla[i][j] = matrizCountDupla[i][j] + 1;
+			}
+		}
+	}
+	
+	//SHOW DUPLAS
+	for (i = 0; i < 61; i++) {
+        for (j = 0; j < 61; j++) {
+            if (matrizCountDupla[i][j] > 0){
+                printf("\nDuplas %d e %d -> %d", i, j, matrizCountDupla[i][j]);
+            }
+        }
+    }	
+	getch();
+}
 
