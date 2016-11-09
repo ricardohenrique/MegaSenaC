@@ -226,21 +226,23 @@ void jogar(int jogos[countJogosLinha][countJogosColuna]){
 	//--------------------------------------------------
 	system("cls");
 	
-	int x, y, vetorOrdenado[6];
+	int x, y, j, z, vetorOrdenado[6], acertos[3][];
 	
-	for(x = 0; x < countJogosLinha; x++){
-		printf("\nSorteio [%.2d]: ", (x + 1)); 		  		 
+	for(x = 0; x < 4; x++){		  		 
 	    for(y = 0; y < countJogosColuna; y++){	
-	    	vetorOrdenado[y] = jogos[x][y];
-			printf("%.2d ", jogos[x][y]); 		              
-        }   
-		bubbleSort(vetorOrdenado, countJogosColuna);
-		printf("[ ");
-		for(y = 0; y < countJogosColuna; y++){	
-			printf("%.2d ", vetorOrdenado[y]); 		              
-        }  
-        printf("]");
-        
+	    	//vetorOrdenado[y] = jogos[x][y];
+			//printf("%.2d ", jogos[x][y]); 
+			for(j = 0 ; j < 3 ; j++){
+		        //printf("\nJogador %d %s\n", i + 1, jogadores[i]);
+		        for(z = 0 ; z < 6 ; z++){
+        			if(jogos[x][y] == jogadas[j][z]){
+        				//PAREI AQUI
+					}
+		        	
+					//printf("%d ", jogadas[i][j]);
+		        }
+			}             
+		}   
 	}
 	getch();
 }
