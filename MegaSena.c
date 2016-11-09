@@ -44,7 +44,7 @@ void menu(void){
 				duplasMaisSorteadas(jogos);         
 			break;
             case '3' : 
-				//jogada(sorteios);                
+				jogar(jogos);
 			break;
             case '0' : 
 				printf("\nObrigado por jogar, volte sempre.\n");    
@@ -132,7 +132,7 @@ void mostrarJogos(int jogos[countJogosLinha][countJogosColuna]){
 void mostrarCountNumeros(int countNumeroX[61][2]){
 	int x;
 	for(x = 1; x < 61; x++){
-		printf("\n Numero [%.2d]: ", x); 		  		 
+		printf("\n Numero[%.2d]: ", x); 		  		 
 		printf("%.2d vezes", countNumeroX[x][1]); 	              
 	}	
 	getch();
@@ -188,10 +188,61 @@ void duplasMaisSorteadas(int jogos[countJogosLinha][countJogosColuna]){
 	for (i = 0; i < 61; i++) {
         for (j = 0; j < 61; j++) {
             if (matrizCountDupla[i][j] > 0){
-                printf("\nDuplas %d e %d -> %d", i, j, matrizCountDupla[i][j]);
+                printf("\nDuplas %.2d e %.2d -> %.3d", i, j, matrizCountDupla[i][j]);
             }
         }
     }	
 	getch();
 }
+
+void jogar(int jogos[countJogosLinha][countJogosColuna]){
+
+    int i, j;
+    int num;
+    char jogadores[3][50];
+    int jogadas[3][6];
+
+    for(i = 0 ; i < 3 ; i++){
+        printf("Jogador %d: ", i + 1);
+        scanf("%s", jogadores[i]);
+
+        printf("\nInforme os 6 numeros\n");
+
+        for(j = 0 ; j < 6 ; j++){
+            scanf("%d", &jogadas[i][j]);
+        }
+    }
+    
+	system("cls");
+    
+	for(i = 0 ; i < 3 ; i++){
+        printf("\nJogador %d %s\n", i + 1, jogadores[i]);
+        for(j = 0 ; j < 6 ; j++){
+			printf("%d ", jogadas[i][j]);
+        }
+    }
+    
+    getch();
+	//--------------------------------------------------
+	system("cls");
+	
+	int x, y, vetorOrdenado[6];
+	
+	for(x = 0; x < countJogosLinha; x++){
+		printf("\nSorteio [%.2d]: ", (x + 1)); 		  		 
+	    for(y = 0; y < countJogosColuna; y++){	
+	    	vetorOrdenado[y] = jogos[x][y];
+			printf("%.2d ", jogos[x][y]); 		              
+        }   
+		bubbleSort(vetorOrdenado, countJogosColuna);
+		printf("[ ");
+		for(y = 0; y < countJogosColuna; y++){	
+			printf("%.2d ", vetorOrdenado[y]); 		              
+        }  
+        printf("]");
+        
+	}
+	getch();
+}
+
 
