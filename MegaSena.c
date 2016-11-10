@@ -202,6 +202,11 @@ void jogar(int jogos[countJogosLinha][countJogosColuna]){
     char jogadores[3][50];
     int jogadas[3][6];
 
+	printf("\n");
+	for(i = 0 ; i < 6 ; i++){
+		printf(" | %d ", jogos[2999][i]);
+	}
+	printf("\n");
     for(i = 0 ; i < 3 ; i++){
         printf("Jogador %d: ", i + 1);
         scanf("%s", jogadores[i]);
@@ -218,7 +223,7 @@ void jogar(int jogos[countJogosLinha][countJogosColuna]){
 	for(i = 0 ; i < 3 ; i++){
         printf("\nJogador %d %s\n", i + 1, jogadores[i]);
         for(j = 0 ; j < 6 ; j++){
-			printf("%d ", jogadas[i][j]);
+			printf("%.2d ", jogadas[i][j]);
         }
     }
     
@@ -226,24 +231,27 @@ void jogar(int jogos[countJogosLinha][countJogosColuna]){
 	//--------------------------------------------------
 	system("cls");
 	
-	int x, y, j, z, vetorOrdenado[6], acertos[3][];
-	
-	for(x = 0; x < 4; x++){		  		 
-	    for(y = 0; y < countJogosColuna; y++){	
-	    	//vetorOrdenado[y] = jogos[x][y];
-			//printf("%.2d ", jogos[x][y]); 
-			for(j = 0 ; j < 3 ; j++){
-		        //printf("\nJogador %d %s\n", i + 1, jogadores[i]);
-		        for(z = 0 ; z < 6 ; z++){
-        			if(jogos[x][y] == jogadas[j][z]){
-        				//PAREI AQUI
-					}
-		        	
-					//printf("%d ", jogadas[i][j]);
-		        }
-			}             
-		}   
+	int x, y, z, acertos[3][1];
+			  		 
+	acertos[0][1] = 0;
+	acertos[1][1] = 0;		  		 
+	acertos[2][1] = 0;		  		 		  		 
+    for(y = 0; y < countJogosColuna; y++){
+		//printf("%.2d ", jogos[2999][y]); 
+		for(j = 0 ; j < 3 ; j++){
+	        //printf("\nJogador %d %s\n", i + 1, jogadores[i]);
+	        for(z = 0 ; z < 6 ; z++){
+    			if(jogos[2999][y] == jogadas[j][z]){
+    				acertos[j][1] = acertos[j][1] + 1;
+				}
+				//printf("%d ", jogadas[i][j]);
+	        }
+		}             
 	}
+	
+	for(y = 0; y < 3; y++){
+		printf("\nJogador %s acertou %d numeros", jogadores[y], acertos[y][1]);
+	}   
 	getch();
 }
 
