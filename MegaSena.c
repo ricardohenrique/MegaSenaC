@@ -235,22 +235,20 @@ void jogar(int jogos[countJogosLinha][countJogosColuna]){
 			  		 
 	acertos[0][1] = 0;
 	acertos[1][1] = 0;		  		 
-	acertos[2][1] = 0;		  		 		  		 
+	acertos[2][1] = 0;
+			  		 		  		 
     for(y = 0; y < countJogosColuna; y++){
-		//printf("%.2d ", jogos[2999][y]); 
 		for(j = 0 ; j < 3 ; j++){
-	        //printf("\nJogador %d %s\n", i + 1, jogadores[i]);
 	        for(z = 0 ; z < 6 ; z++){
     			if(jogos[2999][y] == jogadas[j][z]){
     				acertos[j][1] = acertos[j][1] + 1;
 				}
-				//printf("%d ", jogadas[i][j]);
 	        }
 		}             
 	}
 	
 	for(y = 0; y < 3; y++){
-		printf("\nJogador %s acertou %d numeros", jogadores[y], acertos[y][1]);
+		printf("\nParabens %s, voce acertou %d numeros!", jogadores[y], acertos[y][1]);
 	}   
 	getch();
 }
